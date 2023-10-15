@@ -1,20 +1,42 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
+import Navigator from "./navigation/Navigator";
+import { colors } from "./constants/colors";
+import { StatusBar } from "expo-status-bar";
+import { AuthProvider } from "./hooks/useAuth";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { ActivityIndicator, View } from "react-native";
 
-export default function App() {
+function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    // @ts-ignore
+    <AuthProvider>
+      <SafeAreaView style={{ flex: 1 }}>
+        <NavigationContainer
+          fallback={
+            <View style={{ flex: 1 }}>
+              <ActivityIndicator color={colors.blue[100]} size="large" />
+            </View>
+          }
+          theme={{
+            dark: false,
+            colors: {
+              ...DefaultTheme.colors,
+              background: colors.white,
+              text: colors.blue[200],
+            },
+          }}
+        >
+          <Navigator />
+          <StatusBar
+            style="dark"
+            backgroundColor={colors.white}
+            networkActivityIndicatorVisible={false}
+          />
+        </NavigationContainer>
+      </SafeAreaView>
+    </AuthProvider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
