@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { View, ScrollView, Text, TouchableOpacity } from "react-native";
 import commonstyles from "../CommonStyles.styles";
 import styles from "./AskQuestionScreen.styles";

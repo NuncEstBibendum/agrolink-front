@@ -5,5 +5,6 @@ export type Message = {
   text: string;
   user: MessageUser;
   hasAnswer: boolean;
+  isLiked: boolean | null;
   createdAt: string;
 };

@@ -50,3 +50,17 @@ export const getConversationById = async (conversationId: string) => {
   const res = await get(`/conversations/id/?id=${conversationId}`);
   return res.data;
 };
+
+export const sendReactionToMessage = async ({
+  messageId,
+  reaction,
+}: {
+  messageId: string;
+  reaction: boolean | null;
+}) => {
+  const res = await post("/message/reaction", {
+    messageId,
+    reaction,
+  });
+  return res.data;
+};
