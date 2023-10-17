@@ -12,6 +12,7 @@ import styles from "./AuthScreen.styles";
 import * as SecureStore from "expo-secure-store";
 import { AppStackProps } from "../../types/navigation/AppStack";
 import { CustomPicker, Item } from "../../components/Common/CustomPicker";
+import { isValidPwd } from "../../utils/validation.utils";
 
 const RegisterScreen: React.FunctionComponent = () => {
   const navigationHome = useNavigation<AppStackProps<"MainStack">>();
@@ -77,7 +78,7 @@ const RegisterScreen: React.FunctionComponent = () => {
               setErrorMessage("");
             }}
             label="Adresse email"
-            hasError={!!errorMessage}
+            hasError={!!errorMessage && !errorMessage.includes("mot de passe")}
             value={email}
           />
           <VerticalSpacer height={12} />
@@ -99,6 +100,12 @@ const RegisterScreen: React.FunctionComponent = () => {
             label="Mot de passe"
             hasError={!!errorMessage}
             value={password}
+            onBlur={() =>
+              !isValidPwd(password) &&
+              setErrorMessage(
+                "Le mot de passe doit contenir au moins 8 caractères, une minuscule, une majuscule, un chiffre et un caractère spécial."
+              )
+            }
           />
           <VerticalSpacer height={12} />
           <CustomPicker

@@ -25,7 +25,7 @@ const ModifyPasswordScreen: React.FunctionComponent = () => {
     setErrorMessage("");
     if (!isValidPwd(oldPassword)) {
       setErrorMessage(
-        "Le mot de passe doit contenir au moins 10 caractères, une minuscule, une majuscule, un chiffre et un caractère spécial."
+        "Le mot de passe doit contenir au moins 8 caractères, une minuscule, une majuscule, un chiffre et un caractère spécial."
       );
     }
     if (newPassword !== confirmNewPassword) {
