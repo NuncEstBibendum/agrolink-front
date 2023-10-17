@@ -41,6 +41,11 @@ export const getAllUnansweredConversations = async () => {
   return res.data;
 };
 
+export const getAllAnsweredConversations = async () => {
+  const res = await get("/conversations/answered");
+  return res.data;
+};
+
 export const getConversationById = async (conversationId: string) => {
   const res = await get(`/conversations/id/?id=${conversationId}`);
   return res.data;

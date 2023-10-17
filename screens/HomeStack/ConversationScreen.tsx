@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -27,10 +27,8 @@ import SendIcon from "../../assets/svg/send.svg";
 const ConversationScreen: React.FunctionComponent = () => {
   const route = useRoute<HomeStackRouteProp<"ConversationScreen">>();
   const { conversationId } = route.params;
-  const inputRef = useRef(null);
 
   const [conversation, setConversation] = useState<Conversation | null>(null);
-  const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -67,26 +65,6 @@ const ConversationScreen: React.FunctionComponent = () => {
     getConversation();
   }, []);
 
-  useEffect(() => {
-    const keyboardDidShowListener = Keyboard.addListener(
-      "keyboardDidShow",
-      () => {
-        setKeyboardVisible(true);
-      }
-    );
-    const keyboardDidHideListener = Keyboard.addListener(
-      "keyboardDidHide",
-      () => {
-        setKeyboardVisible(false);
-      }
-    );
-
-    return () => {
-      keyboardDidHideListener.remove();
-      keyboardDidShowListener.remove();
-    };
-  }, []);
-
   if (!conversation) return null;
 
   return (
@@ -112,10 +90,11 @@ const ConversationScreen: React.FunctionComponent = () => {
             renderItem={({ item, index }) => renderItem({ item, index })}
             style={styles.flatList}
             contentContainerStyle={{
-              paddingTop: 40,
+              paddingBottom: 40,
             }}
             onRefresh={() => getConversation()}
             refreshing={isLoading}
+            inverted
           />
         </View>
         <View style={styles.textInputContainer}>
@@ -125,7 +104,6 @@ const ConversationScreen: React.FunctionComponent = () => {
             onChangeText={(text) => setMessage(text)}
             style={{ flex: 1 }}
             value={message}
-            ref={inputRef}
           />
           <TouchableOpacity
             style={styles.sendIconContainer}
