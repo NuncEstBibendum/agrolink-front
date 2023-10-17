@@ -127,14 +127,16 @@ export const AuthProvider: React.FC<IAuthContext> = ({ children }: any) => {
     newPassword: string,
     confirmNewPassword: string
   ) => {
-    const res = await put(`/v1/changepwd`, {
+    const res = await put(`/auth/update/password`, {
       oldPassword,
       newPassword,
       confirmNewPassword,
     });
 
+    console.log("res-----------", res);
+
     if (!res) {
-      throw new Error("Register failed.");
+      throw new Error("Update password failed.");
     }
     const { status } = res;
     return { success: status === 200 };

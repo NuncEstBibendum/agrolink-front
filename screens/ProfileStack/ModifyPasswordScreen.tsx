@@ -14,29 +14,40 @@ import { ProfileStackProps } from "../../types/navigation/ProfileStack";
 const ModifyPasswordScreen: React.FunctionComponent = () => {
   const navigationHome = useNavigation<ProfileStackProps<"ProfileScreen">>();
 
-  const [pwd0, setPwd0] = useState("");
-  const [pwd1, setPwd1] = useState("");
-  const [pwd2, setPwd2] = useState("");
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmNewPassword, setConfirmNewPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const { changePassword } = useAuth();
 
   const handleSubmit = async () => {
     setErrorMessage("");
-    if (!isValidPwd(pwd1)) {
+    if (!isValidPwd(oldPassword)) {
       setErrorMessage(
         "Le mot de passe doit contenir au moins 10 caractères, une minuscule, une majuscule, un chiffre et un caractère spécial."
       );
     }
-    if (pwd1 !== pwd2) {
+    if (newPassword !== confirmNewPassword) {
       setErrorMessage("Les mots de passe ne correspondent pas.");
     }
-    if (isValidPwd(pwd1) && pwd1 === pwd2) {
+    if (isValidPwd(newPassword) && newPassword === confirmNewPassword) {
       setIsLoading(true);
-      const res = await changePassword(pwd0, pwd1, pwd2);
-      setIsLoading(false);
-      if (res.success) {
-        navigationHome.navigate("ProfileScreen", { isPasswordModified: true });
+      try {
+        const res = await changePassword(
+          oldPassword,
+          newPassword,
+          confirmNewPassword
+        );
+        setIsLoading(false);
+        if (res.success) {
+          navigationHome.navigate("ProfileScreen", {
+            isPasswordModified: true,
+          });
+        }
+      } catch (e) {
+        setIsLoading(false);
+        console.log("ERROR:", JSON.stringify(e));
       }
     }
     return;
@@ -52,32 +63,32 @@ const ModifyPasswordScreen: React.FunctionComponent = () => {
         <CustomTextInput
           placeholder="Mot de passe actuel"
           autoComplete="password"
-          onChangeText={(text) => setPwd0(text)}
+          onChangeText={(text) => setOldPassword(text)}
           label="Mot de passe actuel"
-          value={pwd0}
+          value={oldPassword}
         />
         <VerticalSpacer height={12} />
         <CustomTextInput
           placeholder="Nouveau mot de passe"
           autoComplete="password"
-          onChangeText={(text) => setPwd1(text)}
+          onChangeText={(text) => setNewPassword(text)}
           label="Nouveau mot de passe"
           hasError={errorMessage !== ""}
-          value={pwd1}
+          value={newPassword}
         />
         <VerticalSpacer height={12} />
         <CustomTextInput
           placeholder="Confirmer le mot de passe"
           autoComplete="password"
-          onChangeText={(text) => setPwd2(text)}
+          onChangeText={(text) => setConfirmNewPassword(text)}
           label="Confirmer le mot de passe"
           hasError={errorMessage !== ""}
           onBlur={() => {
-            pwd1 !== pwd2
+            newPassword !== confirmNewPassword
               ? setErrorMessage("Les mots de passe ne correspondent pas.")
               : setErrorMessage("");
           }}
-          value={pwd2}
+          value={confirmNewPassword}
         />
         <VerticalSpacer height={3} />
         {errorMessage && <Text style={styles.error}>{errorMessage}</Text>}
@@ -90,9 +101,9 @@ const ModifyPasswordScreen: React.FunctionComponent = () => {
           isLoading={isLoading}
           disabled={
             isLoading ||
-            pwd0 === "" ||
-            pwd1 === "" ||
-            pwd2 === "" ||
+            oldPassword === "" ||
+            newPassword === "" ||
+            confirmNewPassword === "" ||
             errorMessage !== ""
           }
         />

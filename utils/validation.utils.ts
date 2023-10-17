@@ -13,7 +13,7 @@ export const isValidPwd = (pwd: string) => {
   const hasUppercaseChar = pwd?.match(/[A-Z]/g);
   const hasDigitChar = pwd?.match(/[0-9]/g);
   const hasSpecialChar = pwd?.match(/[^a-zA-Z\d]/g);
-  const isValidLength = pwd?.length >= 10;
+  const isValidLength = pwd?.length >= 8;
   return (
     hasLowercaseChar &&
     hasUppercaseChar &&
