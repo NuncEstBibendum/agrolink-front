@@ -1,23 +1,26 @@
 import { put } from "./utils.service";
 
 export const changeEmail = async ({
-  email1,
-  email2,
-  pwd0,
+  oldEmail,
+  email,
+  confirmEmail,
+  password,
 }: {
-  email1: string;
-  email2: string;
-  pwd0: string;
+  oldEmail: string;
+  email: string;
+  confirmEmail: string;
+  password: string;
 }) => {
   try {
-    const res = await put("/v1/changeemail", {
-      email1,
-      email2,
-      pwd0,
+    const res = await put("/auth/update/email", {
+      oldEmail,
+      email,
+      confirmEmail,
+      password,
     });
     return res;
   } catch (error) {
-    console.error("Error in changeEmail ", JSON.stringify(error));
+    console.error("Error in update/email ", JSON.stringify(error));
     return null;
   }
 };

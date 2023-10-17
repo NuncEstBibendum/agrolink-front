@@ -8,24 +8,20 @@ import styles from "./ModifyEmailScreen.styles";
 import { TitleBar } from "../../components/Common/TitleBar";
 import { useNavigation } from "@react-navigation/native";
 import { useAuth } from "../../hooks/useAuth";
-import jwt_decode from "jwt-decode";
-import { DecodedJwt } from "../../types/models/DecodedJwt";
-import { isValidEmail, isValidPwd } from "../../utils/validation.utils";
+import { isValidEmail } from "../../utils/validation.utils";
 import { changeEmail } from "../../services/user.service";
 import { ProfileStackProps } from "../../types/navigation/ProfileStack";
 
 const ModifyEmailScreen: React.FunctionComponent = () => {
-  const { login } = useAuth();
+  const { login, email: currentEmail } = useAuth();
   const navigationProfileScreen =
     useNavigation<ProfileStackProps<"ProfileScreen">>();
 
   const [email, setEmail] = useState("");
   const [confirmEmail, setConfirmEmail] = useState("");
-  const [pwd0, setPwd0] = useState("");
+  const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const { accessToken } = useAuth();
-  const decodedJwt: DecodedJwt = jwt_decode(accessToken);
 
   const handleSubmit = async () => {
     setErrorMessage("");
@@ -43,12 +39,14 @@ const ModifyEmailScreen: React.FunctionComponent = () => {
     ) {
       setIsLoading(true);
       const resChangeEmail = await changeEmail({
-        email1: email,
-        email2: confirmEmail,
-        pwd0: pwd0,
+        oldEmail: currentEmail,
+        email: email,
+        confirmEmail: confirmEmail,
+        password: password,
       });
       setIsLoading(false);
-      const resSignin = await login({ email: email, password: pwd0 });
+      const resSignin = await login({ email: email, password: password });
+      console.log("resSignin", resSignin);
       if (resChangeEmail?.status === 200 && resSignin) {
         navigationProfileScreen.navigate("ProfileScreen", {
           isEmailModified: true,
@@ -66,12 +64,12 @@ const ModifyEmailScreen: React.FunctionComponent = () => {
       <VerticalSpacer height={30} />
       <View style={styles.form}>
         <CustomTextInput
-          placeholder={decodedJwt.sub}
+          placeholder={currentEmail}
           autoComplete="email"
-          onChangeText={(text) => console.log(text)}
+          onChangeText={() => {}}
           label="Adresse email actuelle"
           disabled
-          value={decodedJwt.sub}
+          value={currentEmail}
         />
         <VerticalSpacer height={12} />
         <CustomTextInput
@@ -100,9 +98,9 @@ const ModifyEmailScreen: React.FunctionComponent = () => {
         <CustomTextInput
           placeholder="Mot de passe"
           autoComplete="password"
-          onChangeText={(text) => setPwd0(text)}
+          onChangeText={(text) => setPassword(text)}
           label="Mot de passe"
-          value={pwd0}
+          value={password}
         />
         <VerticalSpacer height={3} />
         {errorMessage && <Text style={styles.error}>{errorMessage}</Text>}

@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     zIndex: 0,
   },
   container: {
-    backgroundColor: colors.green[300],
+    backgroundColor: colors.green[700],
     paddingVertical: 16,
     paddingHorizontal: 24,
     borderRadius: 16,
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     width: 32,
     height: 32,
     borderRadius: 32,
-    backgroundColor: colors.green[100],
+    backgroundColor: colors.green[300],
     alignItems: "center",
     justifyContent: "center",
   },
