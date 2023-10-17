@@ -52,7 +52,7 @@ const HomeScreen: React.FunctionComponent = () => {
       setIsLoading(false);
     } catch (e) {
       setIsLoading(false);
-      console.log("ERROR in getInfos:", JSON.stringify(e));
+      console.error("ERROR in getInfos:", JSON.stringify(e));
     }
   };
 

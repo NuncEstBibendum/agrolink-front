@@ -34,7 +34,7 @@ const ResetPasswordScreen: React.FunctionComponent = () => {
       const res = await resetPassword(pwd1, pwd2, route.params.token);
       navigationLogin.navigate("AuthScreen");
     } catch (e) {
-      console.log("error", e);
+      console.error("error", e);
       setErrorMessage("Le mot de passe est incorrect.");
     }
     setIsLoading(false);

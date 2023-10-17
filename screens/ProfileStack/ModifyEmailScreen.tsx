@@ -46,7 +46,6 @@ const ModifyEmailScreen: React.FunctionComponent = () => {
       });
       setIsLoading(false);
       const resSignin = await login({ email: email, password: password });
-      console.log("resSignin", resSignin);
       if (resChangeEmail?.status === 200 && resSignin) {
         navigationProfileScreen.navigate("ProfileScreen", {
           isEmailModified: true,

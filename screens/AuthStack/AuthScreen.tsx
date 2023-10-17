@@ -35,7 +35,6 @@ const AuthScreen: React.FunctionComponent = () => {
       const accessToken = await SecureStore.getItemAsync("accessToken");
       if (accessToken) {
         setIsLoading(false);
-        console.log("res", res);
         if (res.temporaryPassword) {
           navigationModifyPasswordScreen.navigate("ProfileStack", {
             screen: "ModifyPasswordScreen",
@@ -50,7 +49,7 @@ const AuthScreen: React.FunctionComponent = () => {
         setErrorMessage("Identifiants incorrects.");
       }
     } catch (e) {
-      console.log("ERROR:", JSON.stringify(e));
+      console.error("ERROR:", JSON.stringify(e));
       setIsLoading(false);
       setErrorMessage("Identifiants incorrects. Veuillez réessayer.");
     }

@@ -51,7 +51,7 @@ const ModifyPasswordScreen: React.FunctionComponent = () => {
         }
       } catch (e) {
         setIsLoading(false);
-        console.log("ERROR:", JSON.stringify(e));
+        console.error("ERROR:", JSON.stringify(e));
       }
     }
     return;

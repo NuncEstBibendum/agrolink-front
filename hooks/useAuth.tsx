@@ -205,7 +205,7 @@ export const AuthProvider: React.FC<IAuthContext> = ({ children }: any) => {
       await SecureStore.setItemAsync("email", data.email);
       await SecureStore.setItemAsync("profession", data.profession);
     } catch (e) {
-      console.log("ERROR in saveUserInfo:", JSON.stringify(e));
+      console.error("ERROR in saveUserInfo:", JSON.stringify(e));
     }
   };
 

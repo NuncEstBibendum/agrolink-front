@@ -50,7 +50,7 @@ const RegisterScreen: React.FunctionComponent = () => {
         setErrorMessage("Identifiants incorrects.");
       }
     } catch (e) {
-      console.log("ERROR:", JSON.stringify(e));
+      console.error("ERROR:", JSON.stringify(e));
       setIsLoading(false);
       setErrorMessage("Identifiants incorrects. Veuillez réessayer.");
     }
