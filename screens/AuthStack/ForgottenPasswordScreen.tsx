@@ -30,6 +30,7 @@ const ForgottenPasswordScreen: React.FunctionComponent = () => {
       });
     } catch (e) {
       setIsLoading(false);
+      console.log("ERROR in handleSubmit:", JSON.stringify(e));
       navigationResetPasswordScreen.navigate("EmailSentScreen", {
         email: email,
       });
@@ -60,7 +61,7 @@ const ForgottenPasswordScreen: React.FunctionComponent = () => {
       </View>
       <View style={commonstyles.footer}>
         <Button
-          title="Modifier le mot de passe"
+          title="Réinitialiser mon mot de passe"
           type="primary"
           handlePress={handleSubmit}
           isLoading={isLoading}

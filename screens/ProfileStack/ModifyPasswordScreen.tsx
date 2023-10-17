@@ -6,12 +6,16 @@ import { VerticalSpacer } from "../../components/Common/VerticalSpacer";
 import commonstyles from "../CommonStyles.styles";
 import styles from "./ModifyPasswordScreen.styles";
 import { TitleBar } from "../../components/Common/TitleBar";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { useAuth } from "../../hooks/useAuth";
 import { isValidPwd } from "../../utils/validation.utils";
-import { ProfileStackProps } from "../../types/navigation/ProfileStack";
+import {
+  ProfileStackProps,
+  ProfileStackRouteProp,
+} from "../../types/navigation/ProfileStack";
 
 const ModifyPasswordScreen: React.FunctionComponent = () => {
+  const route = useRoute<ProfileStackRouteProp<"ModifyPasswordScreen">>();
   const navigationHome = useNavigation<ProfileStackProps<"ProfileScreen">>();
 
   const [oldPassword, setOldPassword] = useState("");
@@ -56,7 +60,10 @@ const ModifyPasswordScreen: React.FunctionComponent = () => {
   return (
     <View style={commonstyles.mainContainer}>
       <View style={styles.header}>
-        <TitleBar title="Modifier mon mot de passe" />
+        <TitleBar
+          hideBackButton={route.params?.isTemporaryPassword}
+          title="Modifier mon mot de passe"
+        />
       </View>
       <View style={styles.form}>
         <VerticalSpacer height={28} />

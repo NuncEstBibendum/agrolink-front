@@ -11,7 +11,9 @@ interface UserInfo {
 
 interface IAuthContext extends UserInfo {
   loaded: boolean;
-  login: (user: UserLoginCredentials) => Promise<{ success: boolean }>;
+  login: (
+    user: UserLoginCredentials
+  ) => Promise<{ success: boolean; temporaryPassword: boolean | null }>;
   logout: () => Promise<void>;
   register: (user: UserCreation) => Promise<{ success: boolean }>;
   refetchInfo: () => Promise<{ email: string; profession: string }>;
@@ -34,7 +36,10 @@ const AuthContext = createContext<IAuthContext>({
   email: "",
   profession: "",
   loaded: false,
-  login: async (user: UserLoginCredentials) => ({ success: false }),
+  login: async (user: UserLoginCredentials) => ({
+    success: false,
+    temporaryPassword: false,
+  }),
   logout: async () => {},
   register: async (user: UserCreation) => ({ success: false }),
   refetchInfo: async () => ({ email: "", profession: "" }),
@@ -71,7 +76,11 @@ export const AuthProvider: React.FC<IAuthContext> = ({ children }: any) => {
       accessToken: data.accessToken,
       email: data.email,
     });
-    return { success: !!data.accessToken };
+
+    return {
+      success: !!data.accessToken,
+      temporaryPassword: data.temporaryPassword,
+    };
   };
 
   const logout = async () => {
@@ -107,12 +116,12 @@ export const AuthProvider: React.FC<IAuthContext> = ({ children }: any) => {
   };
 
   const forgottenPassword = async (email: string) => {
-    const res = await post(`/public/resetPwd`, {
+    const res = await post(`/auth/forgotten-password`, {
       email,
     });
 
     if (!res) {
-      throw new Error("Register failed.");
+      // throw no error to avoid giving information to the user
     }
     const data = res.data ?? res;
   };

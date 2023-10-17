@@ -62,7 +62,12 @@ export const MessageComponent = (props: Props) => {
   }, []);
 
   return (
-    <View style={styles.wrapper}>
+    <View
+      style={[
+        styles.wrapper,
+        isMyMessageOrOtherAgronomist() ? { justifyContent: "flex-end" } : {},
+      ]}
+    >
       <View
         style={[
           styles.container,
@@ -139,7 +144,6 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
     alignItems: "center",
-    justifyContent: "flex-end",
   },
   container: {
     maxWidth: "80%",

@@ -11,12 +11,16 @@ import commonstyles from "../CommonStyles.styles";
 import styles from "./AuthScreen.styles";
 import * as SecureStore from "expo-secure-store";
 import { AppStackProps } from "../../types/navigation/AppStack";
+import { ProfileStackProps } from "../../types/navigation/ProfileStack";
+import { MainStackProps } from "../../types/navigation/MainStack";
 
 const AuthScreen: React.FunctionComponent = () => {
   const navigationHome = useNavigation<AppStackProps<"MainStack">>();
   const navigationRegister = useNavigation<AuthStackProps<"RegisterScreen">>();
   const navigationForgottenPassword =
     useNavigation<AuthStackProps<"ForgottenPasswordScreen">>();
+  const navigationModifyPasswordScreen =
+    useNavigation<AppStackProps<"ProfileStack">>();
   const { login } = useAuth();
 
   const [email, setEmail] = useState("");
@@ -31,7 +35,15 @@ const AuthScreen: React.FunctionComponent = () => {
       const accessToken = await SecureStore.getItemAsync("accessToken");
       if (accessToken) {
         setIsLoading(false);
-        navigationHome.navigate("MainStack");
+        console.log("res", res);
+        if (res.temporaryPassword) {
+          navigationModifyPasswordScreen.navigate("ProfileStack", {
+            screen: "ModifyPasswordScreen",
+            params: { isTemporaryPassword: true },
+          });
+        } else {
+          navigationHome.navigate("MainStack");
+        }
       }
       if (!res.success) {
         setIsLoading(false);

@@ -7,6 +7,7 @@ import { View } from "react-native";
 import { colors } from "../constants/colors";
 import jwt_decode from "jwt-decode";
 import { DecodedJwt } from "../types/models/DecodedJwt";
+import ProfileStack from "./ProfileStack";
 
 const Stack = createNativeStackNavigator();
 
@@ -49,6 +50,7 @@ const Navigator = () => {
     >
       <Stack.Screen name="AuthStack" component={AuthStack} />
       <Stack.Screen name="MainStack" component={MainStack} />
+      <Stack.Screen name="ProfileStack" component={ProfileStack} />
     </Stack.Navigator>
   ) : (
     <View

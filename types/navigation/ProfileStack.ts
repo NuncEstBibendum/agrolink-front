@@ -8,7 +8,7 @@ export type ProfileStackListParams = {
     | undefined;
   UnavailabilityScreen: undefined;
   ModifyEmailScreen: undefined;
-  ModifyPasswordScreen: undefined;
+  ModifyPasswordScreen: { isTemporaryPassword?: boolean } | undefined;
   SignedContractsScreen: undefined;
 };
 

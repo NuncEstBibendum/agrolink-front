@@ -45,7 +45,7 @@ const EmailSentScreen: React.FunctionComponent = () => {
         <VerticalSpacer height={30} />
         <View style={styles.form}>
           <Text style={styles.subtitle}>
-            {`Un email vient de vous être envoyé si l'adresse ${route.params.email} correspond bien à un compte utilisateur. Merci d'ouvrir le lien présent dans ce mail depuis votre smartphone afin de réinitialiser votre mot de passe.`}
+            {`Un email avec un mot de passe temporaire vient de vous être envoyé si l'adresse ${route.params.email} correspond bien à un compte utilisateur.`}
           </Text>
           {errorMessage && <Text style={styles.error}>{errorMessage}</Text>}
         </View>
