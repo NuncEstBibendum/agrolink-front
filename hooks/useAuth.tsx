@@ -1,10 +1,5 @@
-import axios from "axios";
 import React, { createContext, useContext, useEffect, useState } from "react";
-import {
-  UserCreation,
-  UserData,
-  UserLoginCredentials,
-} from "../types/models/Auth";
+import { UserCreation, UserLoginCredentials } from "../types/models/Auth";
 import * as SecureStore from "expo-secure-store";
 import { get, post, put } from "../services/utils.service";
 

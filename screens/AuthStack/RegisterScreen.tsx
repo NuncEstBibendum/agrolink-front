@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
-import React, { useRef, useState } from "react";
-import { Text, View, TouchableOpacity, Image } from "react-native";
+import React, { useState } from "react";
+import { Text, View, TouchableOpacity } from "react-native";
 import { Button } from "../../components/Common/Button";
 import { CustomTextInput } from "../../components/Common/TextInput";
 import { TitleBar } from "../../components/Common/TitleBar";
