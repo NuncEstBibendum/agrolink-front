@@ -128,8 +128,6 @@ export const AuthProvider: React.FC<IAuthContext> = ({ children }: any) => {
       confirmNewPassword,
     });
 
-    console.log("res-----------", res);
-
     if (!res) {
       throw new Error("Update password failed.");
     }

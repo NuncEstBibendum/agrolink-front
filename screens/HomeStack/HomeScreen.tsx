@@ -1,12 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  View,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  ActivityIndicator,
-  FlatList,
-} from "react-native";
+import { View, Text, ActivityIndicator, FlatList } from "react-native";
 import commonstyles from "../CommonStyles.styles";
 import styles from "./HomeScreen.styles";
 import { VerticalSpacer } from "../../components/Common/VerticalSpacer";
@@ -99,6 +92,7 @@ const HomeScreen: React.FunctionComponent = () => {
             style={styles.flatList}
             onRefresh={() => getInfos()}
             refreshing={isLoading}
+            contentContainerStyle={{ gap: 10 }}
             ListFooterComponent={
               <>
                 {profession === "farmer" && (

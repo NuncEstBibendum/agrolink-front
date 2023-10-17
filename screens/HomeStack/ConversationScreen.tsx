@@ -6,6 +6,9 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   Keyboard,
+  Image,
+  TouchableWithoutFeedback,
+  Linking,
 } from "react-native";
 import commonstyles from "../CommonStyles.styles";
 import styles from "./ConversationScreen.styles";
@@ -23,10 +26,14 @@ import { MessageComponent } from "../../components/Conversation/MessageComponent
 import { Message } from "../../types/models/Message";
 import { CustomTextInput } from "../../components/Common/TextInput";
 import SendIcon from "../../assets/svg/send.svg";
+import { getMostRecentMessage } from "../../utils/conversation.utils";
+import { blogLinks } from "../../constants/constants";
+import { useAuth } from "../../hooks/useAuth";
 
 const ConversationScreen: React.FunctionComponent = () => {
   const route = useRoute<HomeStackRouteProp<"ConversationScreen">>();
   const { conversationId } = route.params;
+  const { profession } = useAuth();
 
   const [conversation, setConversation] = useState<Conversation | null>(null);
   const [message, setMessage] = useState("");
@@ -67,6 +74,66 @@ const ConversationScreen: React.FunctionComponent = () => {
 
   if (!conversation) return null;
 
+  const mostRecentMessage = getMostRecentMessage(conversation);
+
+  const renderHeader = () =>
+    !mostRecentMessage?.hasAnswer && profession === "farmer" ? (
+      <>
+        <Text style={styles.whileWaitingText}>
+          En attendant une réponse, découvrez cet article de Blog 👇
+        </Text>
+        <TouchableOpacity
+          style={styles.blogCard}
+          onPress={() =>
+            Linking.openURL(
+              blogLinks[conversation.tags[0].name as keyof typeof blogLinks]
+                .link
+            )
+          }
+          activeOpacity={0.6}
+        >
+          <View style={styles.imgContainer}>
+            <Image
+              source={{
+                uri: blogLinks[
+                  conversation.tags[0].name as keyof typeof blogLinks
+                ].imgUrl,
+              }}
+              width={400}
+              height={200}
+              resizeMode="cover"
+            />
+          </View>
+          <View style={styles.blogCardTextContainer}>
+            <View style={styles.blogCardTextHeader}>
+              <View
+                style={[
+                  styles.tag,
+                  { backgroundColor: conversation.tags[0].color },
+                ]}
+              >
+                <Text style={styles.tagText}>
+                  {TagEnum[conversation.tags[0].name as keyof typeof TagEnum]}
+                </Text>
+              </View>
+              <Text>
+                {
+                  blogLinks[conversation.tags[0].name as keyof typeof blogLinks]
+                    .date
+                }
+              </Text>
+            </View>
+            <Text style={styles.blogCardTitle}>
+              {
+                blogLinks[conversation.tags[0].name as keyof typeof blogLinks]
+                  .title
+              }
+            </Text>
+          </View>
+        </TouchableOpacity>
+      </>
+    ) : null;
+
   return (
     <View style={commonstyles.mainContainer}>
       <TitleBar title={textEllipsis(conversation.title, 35)} />
@@ -95,6 +162,7 @@ const ConversationScreen: React.FunctionComponent = () => {
             onRefresh={() => getConversation()}
             refreshing={isLoading}
             inverted
+            ListHeaderComponent={() => renderHeader()}
           />
         </View>
         <View style={styles.textInputContainer}>

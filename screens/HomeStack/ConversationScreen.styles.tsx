@@ -55,6 +55,40 @@ const styles = StyleSheet.create({
     paddingRight: 16,
     paddingLeft: 8,
   },
+  whileWaitingText: {
+    marginBottom: 8,
+    color: colors.grey[800],
+    fontStyle: "italic",
+    maxWidth: "80%",
+    marginLeft: 8,
+  },
+  blogCard: {
+    maxWidth: "80%",
+    marginLeft: 8,
+    borderRadius: 4,
+    overflow: "hidden",
+  },
+  imgContainer: {
+    width: "100%",
+    borderTopLeftRadius: 4,
+    borderTopRightRadius: 4,
+    overflow: "hidden",
+  },
+  blogCardTextContainer: {
+    padding: 8,
+    width: "100%",
+    backgroundColor: colors.white,
+  },
+  blogCardTextHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  blogCardTitle: {
+    fontSize: 16,
+    fontWeight: "bold",
+    marginVertical: 8,
+  },
 });
 
 export default styles;

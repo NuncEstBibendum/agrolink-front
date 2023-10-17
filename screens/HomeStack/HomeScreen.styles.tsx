@@ -7,7 +7,6 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: colors.grey[100],
   },
-
   header: {
     width: "100%",
     backgroundColor: colors.blue[100],

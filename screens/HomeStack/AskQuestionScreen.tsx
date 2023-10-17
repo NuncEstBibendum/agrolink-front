@@ -58,7 +58,7 @@ const AskQuestionScreen: React.FunctionComponent = () => {
 
   return (
     <View style={commonstyles.mainContainer}>
-      <TitleBar hideBackButton title={"Poser une question"} />
+      <TitleBar title={"Poser une question"} />
       <ScrollView
         style={styles.scrollView}
         contentContainerStyle={{ paddingBottom: 80 }}
