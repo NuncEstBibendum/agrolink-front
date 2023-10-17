@@ -51,6 +51,8 @@ interface Props {
   disabled?: boolean;
   notPressable?: boolean;
   value?: string;
+  style?: any;
+  ref?: any;
 }
 export const CustomTextInput = (props: Props) => {
   const {
@@ -63,9 +65,12 @@ export const CustomTextInput = (props: Props) => {
     numberOfLines,
     disabled,
     notPressable,
+    style,
+    ref,
+    value,
   } = props;
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       {label && (
         <View style={styles.labelContainer}>
           <Text
@@ -80,6 +85,7 @@ export const CustomTextInput = (props: Props) => {
         </View>
       )}
       <TextInput
+        ref={ref}
         placeholder={placeholder}
         onChange={(text) => onChangeText(text.nativeEvent.text)}
         style={[
@@ -99,6 +105,7 @@ export const CustomTextInput = (props: Props) => {
         multiline={numberOfLines ? true : false}
         editable={!(disabled || notPressable)}
         placeholderTextColor={disabled ? colors.black : colors.grey[300]}
+        value={value ? value : ""}
       />
     </View>
   );

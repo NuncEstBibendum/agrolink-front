@@ -30,7 +30,7 @@ const AuthStack: React.FunctionComponent = () => {
     if (loaded) {
       if (accessToken) {
         if (
-          (jwt_decode(accessToken) as DecodedJwt).expirationDate < new Date()
+          new Date((jwt_decode(accessToken) as DecodedJwt).exp) < new Date()
         ) {
           setInitialRoute("AuthScreen");
           return;

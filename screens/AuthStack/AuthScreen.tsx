@@ -61,17 +61,25 @@ const AuthScreen: React.FunctionComponent = () => {
           <CustomTextInput
             placeholder="Adresse email"
             autoComplete="email"
-            onChangeText={(text) => setEmail(text)}
+            onChangeText={(text) => {
+              setEmail(text);
+              setErrorMessage("");
+            }}
             label="Adresse email"
             hasError={!!errorMessage}
+            value={email}
           />
           <VerticalSpacer height={12} />
           <CustomTextInput
             placeholder="Mot de passe"
             autoComplete="password"
-            onChangeText={(text) => setPassword(text)}
+            onChangeText={(text) => {
+              setPassword(text);
+              setErrorMessage("");
+            }}
             label="Mot de passe"
             hasError={!!errorMessage}
+            value={password}
           />
           {errorMessage && (
             <>

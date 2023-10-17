@@ -66,11 +66,12 @@ const ModifyEmailScreen: React.FunctionComponent = () => {
       <VerticalSpacer height={30} />
       <View style={styles.form}>
         <CustomTextInput
-          placeholder={decodedJwt.email}
+          placeholder={decodedJwt.sub}
           autoComplete="email"
           onChangeText={(text) => console.log(text)}
           label="Adresse email actuelle"
           disabled
+          value={decodedJwt.sub}
         />
         <VerticalSpacer height={12} />
         <CustomTextInput
@@ -79,6 +80,7 @@ const ModifyEmailScreen: React.FunctionComponent = () => {
           onChangeText={(text) => setEmail(text)}
           label="Nouvelle adresse email"
           hasError={errorMessage !== ""}
+          value={email}
         />
         <VerticalSpacer height={12} />
         <CustomTextInput
@@ -92,6 +94,7 @@ const ModifyEmailScreen: React.FunctionComponent = () => {
               ? setErrorMessage("Les adresses email ne correspondent pas.")
               : setErrorMessage("");
           }}
+          value={confirmEmail}
         />
         <VerticalSpacer height={12} />
         <CustomTextInput
@@ -99,6 +102,7 @@ const ModifyEmailScreen: React.FunctionComponent = () => {
           autoComplete="password"
           onChangeText={(text) => setPwd0(text)}
           label="Mot de passe"
+          value={pwd0}
         />
         <VerticalSpacer height={3} />
         {errorMessage && <Text style={styles.error}>{errorMessage}</Text>}

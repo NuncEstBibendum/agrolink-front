@@ -5,6 +5,8 @@ import { Navigator } from "./Navigator";
 
 export type HomeStackListParams = {
   HomeScreen: undefined;
+  AskQuestionScreen: undefined;
+  ConversationScreen: { conversationId: string };
 };
 
 export type HomeStack = Navigator & HomeStackListParams;

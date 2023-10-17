@@ -53,6 +53,7 @@ const ForgottenPasswordScreen: React.FunctionComponent = () => {
             autoComplete="email"
             onChangeText={(text) => setEmail(text)}
             label="Adresse email"
+            value={email}
           />
           <VerticalSpacer height={20} />
         </View>

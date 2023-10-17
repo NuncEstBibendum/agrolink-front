@@ -78,6 +78,7 @@ const RegisterScreen: React.FunctionComponent = () => {
             }}
             label="Adresse email"
             hasError={!!errorMessage}
+            value={email}
           />
           <VerticalSpacer height={12} />
           <CustomTextInput
@@ -85,6 +86,7 @@ const RegisterScreen: React.FunctionComponent = () => {
             autoComplete="name"
             onChangeText={(text) => setName(text)}
             label="Nom"
+            value={name}
           />
           <VerticalSpacer height={12} />
           <CustomTextInput
@@ -96,6 +98,7 @@ const RegisterScreen: React.FunctionComponent = () => {
             }}
             label="Mot de passe"
             hasError={!!errorMessage}
+            value={password}
           />
           <VerticalSpacer height={12} />
           <CustomPicker

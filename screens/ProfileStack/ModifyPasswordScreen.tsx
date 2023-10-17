@@ -54,6 +54,7 @@ const ModifyPasswordScreen: React.FunctionComponent = () => {
           autoComplete="password"
           onChangeText={(text) => setPwd0(text)}
           label="Mot de passe actuel"
+          value={pwd0}
         />
         <VerticalSpacer height={12} />
         <CustomTextInput
@@ -62,6 +63,7 @@ const ModifyPasswordScreen: React.FunctionComponent = () => {
           onChangeText={(text) => setPwd1(text)}
           label="Nouveau mot de passe"
           hasError={errorMessage !== ""}
+          value={pwd1}
         />
         <VerticalSpacer height={12} />
         <CustomTextInput
@@ -75,6 +77,7 @@ const ModifyPasswordScreen: React.FunctionComponent = () => {
               ? setErrorMessage("Les mots de passe ne correspondent pas.")
               : setErrorMessage("");
           }}
+          value={pwd2}
         />
         <VerticalSpacer height={3} />
         {errorMessage && <Text style={styles.error}>{errorMessage}</Text>}

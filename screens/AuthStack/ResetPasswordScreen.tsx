@@ -57,6 +57,7 @@ const ResetPasswordScreen: React.FunctionComponent = () => {
             onChangeText={(text) => setPwd1(text)}
             label="Nouveau mot de passe"
             hasError={errorMessage !== ""}
+            value={pwd1}
           />
           <VerticalSpacer height={3} />
           <VerticalSpacer height={28} />
@@ -66,6 +67,7 @@ const ResetPasswordScreen: React.FunctionComponent = () => {
             onChangeText={(text) => setPwd2(text)}
             label="Confirmer mot de passe"
             hasError={errorMessage !== ""}
+            value={pwd2}
           />
           <VerticalSpacer height={3} />
           {errorMessage && <Text style={styles.error}>{errorMessage}</Text>}

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Text, View } from "react-native";
 import { Button } from "../../components/Common/Button";
-import { CustomTextInput } from "../../components/Common/TextInput";
 import { VerticalSpacer } from "../../components/Common/VerticalSpacer";
 import commonstyles from "../CommonStyles.styles";
 import styles from "./EmailSentScreen.styles";

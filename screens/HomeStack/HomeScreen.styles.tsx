@@ -27,6 +27,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     paddingVertical: 16,
   },
+  noConversationText: {
+    textAlign: "center",
+  },
 });
 
 export default styles;

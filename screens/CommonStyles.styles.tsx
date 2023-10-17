@@ -8,7 +8,6 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     backgroundColor: colors.white,
     paddingTop: Platform.OS === "ios" ? 24 : 0,
-    position: "relative",
   },
   body: {
     paddingHorizontal: 14,

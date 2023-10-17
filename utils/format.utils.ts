@@ -20,3 +20,10 @@ export const formatPrice = (price: number): string => {
   }
   return formattedPrice;
 };
+
+export const textEllipsis = (text: string, maxLength: number): string => {
+  if (text.length > maxLength) {
+    return `${text.slice(0, maxLength)}...`;
+  }
+  return text;
+};

@@ -1,9 +1,5 @@
 export interface DecodedJwt {
-  expirationDate: Date;
-  firstName: string;
-  lastName: string;
-  role: "user" | "agronomist" | "admin";
-  email: string;
-  token: string;
-  userId: number;
+  exp: number;
+  iat: number;
+  sub: string;
 }
